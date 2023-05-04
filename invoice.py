@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox
 
 class Invoice():
     def __init__(self, master):
@@ -7,22 +8,38 @@ class Invoice():
 
         self._all_Widgets()
 
-    #
+    #Method to add the fouth column into the tree
     def add_to_tree(self):
         quan= int(self.spinbox_quantity.get())
         desc= self.entry_description.get()
         price= float(self.spinbox_unitprice.get())
         total = quan * price
         lst= [quan, desc, price, total]
-        self.tree.insert("", 0, values=lst)
+        if price != 0:
+            self.tree.insert("", 0, values=lst)
+        else:
+            messagebox.showerror("Zero Insertion", "Unite Price must not be Zero!")
+        self.clear_items()
 
-    #
+    #Method to generate the invoice as pdf and also as word 
     def generation(self):
-        pass
+        path = f"invoice.pdf" 
 
-    #
+    #Method to clear all fields including tree and ready for new entries
     def new_invoice(self):
-        pass
+        self.clear_items()
+        self.entry_first_name.delete(0, END)
+        self.entry_second_name.delete(0, END)
+        self.entry_phone_num.delete(0, END)
+        self.tree.delete(*self.tree.get_children())
+
+    #Method to clear the forth column: here column 3
+    def clear_items(self):
+        self.spinbox_quantity.delete(0, END)
+        self.spinbox_quantity.insert(0, "1")
+        self.entry_description.delete(0, END)
+        self.spinbox_unitprice.delete(0, END)
+        self.spinbox_unitprice.insert(0, "0.0")
 
 
     def _all_Widgets(self):
