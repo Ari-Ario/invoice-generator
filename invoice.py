@@ -7,6 +7,16 @@ class Invoice():
 
         self._all_Widgets()
 
+    #
+    def add_to_tree(self):
+        quan= int(self.spinbox_quantity.get())
+        desc= self.entry_description.get()
+        price= float(self.spinbox_unitprice.get())
+        total = quan * price
+        lst= [quan, desc, price, total]
+        self.tree.insert("", 0, values=lst)
+
+
     def _all_Widgets(self):
         self.main_win= LabelFrame(self.master, text="Invoice Information")
         #labels and entries of first row
@@ -23,8 +33,8 @@ class Invoice():
         self.entry_description= Entry(self.main_win)
         self.label_unitprice= Label(self.main_win, text="Unite Price")
         self.spinbox_unitprice= Spinbox(self.main_win, from_=0.0, to=1000, increment=0.5)
-        #button and treeview
-        self.button_add=Button(self.main_win, text="Add Item")
+        #add_button and treeview
+        self.button_add=Button(self.main_win, text="Add Items", command=self.add_to_tree)
         columns= ["quantity", "description", "price", "total"]
         self.tree= ttk.Treeview(self.main_win, columns=columns, show="headings")
         self.tree.heading("quantity", text="Quantity")
