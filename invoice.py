@@ -16,6 +16,14 @@ class Invoice():
         lst= [quan, desc, price, total]
         self.tree.insert("", 0, values=lst)
 
+    #
+    def generation(self):
+        pass
+
+    #
+    def new_invoice(self):
+        pass
+
 
     def _all_Widgets(self):
         self.main_win= LabelFrame(self.master, text="Invoice Information")
@@ -41,6 +49,8 @@ class Invoice():
         self.tree.heading("description", text="Description")
         self.tree.heading("price", text="Price")
         self.tree.heading("total", text="Total")
+        self.button_genrate= Button(self.main_win, text="Generate Inoice", command=self.generation)
+        self.button_new= Button(self.main_win, text="New Invoice", command=self.new_invoice)
 
         #grids of rows 1, 2
         self.main_win.pack(fill=BOTH, padx=10, pady=10)
@@ -60,6 +70,8 @@ class Invoice():
         #grids of add-button and treeview
         self.button_add.grid(row=4, column=2, padx=5, pady=10, sticky=E)
         self.tree.grid(row=5, column=0, columnspan=3, padx=5, pady=10)
+        self.button_genrate.grid(row=6, column=0, columnspan=3, sticky=EW, padx= 5, pady= 5)
+        self.button_new.grid(row=7, column=0, columnspan=3, sticky=EW, padx=5)
 
 if __name__ == "__main__":
     app = Tk()
